@@ -117,14 +117,16 @@ def Text_Feature_Extraction(text:str) -> str:
                 Vitamins\n\
                 Urine Analysis\n\
                 CK-MB and cTN\n'''
-      prompt2=f"Text:{text}\nCategories:{categories}. Return the categories which the report can fall under.Return it separated with commas"
-      data=data = {"contents": [{"parts": [{"text": prompt2}]}]}
+      d={"Doctor Name":"","Hospital Name":"","Date":"","Categories":[]}
+      
+      prompt2=f"Text:{text}\nCategories:{categories}. Return the Doctor Name,Hospital Name,Date and the categories which the report specifies.Return it in this format {d}"
+      data = {"contents": [{"parts": [{"text": prompt2}]}]}
       response=requests.post(endpoint,headers=headers,json=data)
       if response.status_code!=200:
         raise Exception("Could not communicate with api")
       result=response.json()["candidates"][0]["content"]["parts"][0]["text"]
       
-      return json.dumps({"response":(result.split(", "))})
+      return json.dumps({"response":result})
         
 if __name__=="__main__":
     print(Text_Feature_Extraction(open("output").read()))
