@@ -1,1 +1,1 @@
-{"response": "{\"Doctor\": NULL,\"Hospital\": NULL,\"Drugs\": [],\"Amounts\": [],\"Schedule\": NULL,\"Days\": NULL,\"Date\": NULL,\"Future consultation\": NULL}"}
+{"response": "{\"Doctor\": \"Dr. Girish Krishnamurthy\", \"Hospital\": \"BRATHAM KRAMAKRISHNA HOSPITAL\", \"Drugs\": [\"Nervigen NP\"], \"Amounts\": [], \"Schedule\": \"NULL\", \"Days\": \"NULL\", \"Date\": \"12/11/22\", \"Future consultation\": \"NULL\"}"}

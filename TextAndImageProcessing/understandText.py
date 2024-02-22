@@ -126,7 +126,7 @@ def Text_Feature_Extraction(text:str) -> str:
       if response.status_code!=200:
         raise Exception("Could not communicate with api")
       result=response.json()["candidates"][0]["content"]["parts"][0]["text"]
-      with open("./JSON/output.json","w") as fh:
+      with open("./TextAndImageProcessing/JSON/output.json","w") as fh:
           json.dump({"response":result},fh)
         
 if __name__=="__main__":
