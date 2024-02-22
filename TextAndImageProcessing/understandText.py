@@ -99,8 +99,9 @@ def Text_Feature_Extraction(text:str) -> str:
                 raise Exception("Could not communicate with api")
         
         result=response.json()["candidates"][0]["content"]["parts"][0]["text"]
-        print(result)
-        return json.dumps({"response":result})
+        with open("./TextAndImageProcessing/JSON/output.json","w") as fh:
+                json.dump({"response":result},fh)
+        
     elif("yes" in Type.lower()):
       categories='''Complete Blood Count\n \
                 Blood Glucose\n \
@@ -125,8 +126,8 @@ def Text_Feature_Extraction(text:str) -> str:
       if response.status_code!=200:
         raise Exception("Could not communicate with api")
       result=response.json()["candidates"][0]["content"]["parts"][0]["text"]
-      
-      return json.dumps({"response":result})
+      with open("./JSON/output.json","w") as fh:
+          json.dump({"response":result},fh)
         
 if __name__=="__main__":
     print(Text_Feature_Extraction(open("output").read()))
