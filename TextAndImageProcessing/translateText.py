@@ -20,7 +20,7 @@ def translate_text(target: str, text: str) -> str:
     # Text can also be a sequence of strings, in which case this method
     # will return a sequence of results for each text.
     result = translate_client.translate(text, target_language=target)
-    print(type(result))
+    print(text)
     with open("./TextAndImageProcessing/JSON/Translate_output.json","w") as fh:
         json.dump(result,fh)
     return None
