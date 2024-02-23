@@ -99,6 +99,7 @@ def Text_Feature_Extraction(text:str) -> str:
                 raise Exception("Could not communicate with api")
         
         result=response.json()["candidates"][0]["content"]["parts"][0]["text"]
+        result["Type"]="Prescription"
         with open("./TextAndImageProcessing/JSON/output.json","w") as fh:
                 json.dump({"response":result},fh)
         
@@ -126,6 +127,7 @@ def Text_Feature_Extraction(text:str) -> str:
       if response.status_code!=200:
         raise Exception("Could not communicate with api")
       result=response.json()["candidates"][0]["content"]["parts"][0]["text"]
+      result["Type"]="Lab"
       with open("./TextAndImageProcessing/JSON/output.json","w") as fh:
           json.dump({"response":result},fh)
         
