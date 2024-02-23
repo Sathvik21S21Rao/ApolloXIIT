@@ -2,6 +2,8 @@ require('dotenv').config({
   path: ".env.local"
 })
 
+import { database } from '../../database';
+
 const express = require('express');
 const { MessagingResponse } = require('twilio').twiml;
 
