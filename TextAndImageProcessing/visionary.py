@@ -1,6 +1,6 @@
 # from TextAndImageProcessing.convertpdf2img import convert
 
-def detect_handwritten_ocr(path):
+def detect_handwritten_ocr(url):
     """Detects handwritten characters in a local image.
 
     Args:
@@ -9,13 +9,14 @@ def detect_handwritten_ocr(path):
     from google.cloud import vision_v1p3beta1 as vision
     from dotenv import load_dotenv
     import os 
+    import requests
     load_dotenv()
     API_KEY=os.environ.get("API_KEY")
     
     client = vision.ImageAnnotatorClient(client_options={"api_key":API_KEY})
-
-    with open(path, "rb") as image_file:
-        content = image_file.read()
+    content=requests.get(url).content
+    # with open(path, "rb") as image_file:
+    #     content = image_file.read()
 
     image = vision.Image(content=content)
 
@@ -36,4 +37,5 @@ def detect_handwritten_ocr(path):
 
 if __name__=="__main__":
     # convert("./Test/test3.pdf")
-    print(detect_handwritten_ocr("./Test/test1.jpeg"))
+    print(detect_handwritten_ocr(  "https://AC0a596f880a429fa354df2f18ccc60c22:790227ccd7897b25ee4848cb2483b276@api.twilio.com/2010-04-01/Accounts/AC0a596f880a429fa354df2f18ccc60c22/Messages/MM779d253a1157755d271e231376676d7b/Media/ME80353c34701b29123a50f5dfc721dd7c") 
+)
