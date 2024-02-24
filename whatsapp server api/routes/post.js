@@ -1,8 +1,7 @@
 require('dotenv').config({
-  path: ".env.local"
+   path: ".env.local"
 })
 
-import { database } from '../../database';
 
 const express = require('express');
 const { MessagingResponse } = require('twilio').twiml;
@@ -12,31 +11,28 @@ const router = express.Router();
 const username = process.env.twilioAccountSid;
 const password = process.env.twilioAuthToken;
 
+// const database = require('./database');
+
 router.post('/', async (req, res, next) => {
-  const { body } = req;
+   const { body } = req;
 
-  // console.log(body);
+   // console.log(body);
 
-  let images = []
-
-  if (body.NumMedia > 0) {
-    for (let i = 0; i < body.NumMedia; i++) {
-      const url = body[`MediaUrl${i}`]
+   if (body.NumMedia > 0) {
+      const url = body[`MediaUrl0`]
       const accessibleUrl = "https://" + username + ":" + password + "@" + url.slice(8);
-      images.push(accessibleUrl);
 
       console.log(accessibleUrl);
 
-      message = new MessagingResponse().message("Got the image!");
+      message = new MessagingResponse().message("Got the report!");
       message.media(accessibleUrl);
-    }
-  } else {
-    message = new MessagingResponse().message('Send us an image!');
-  }
+   } else {
+      message = new MessagingResponse().message("Send a report");
+   }
 
-  res.set('Content-Type', 'text/xml');
-  res.send(message.toString()).status(200);
-  next();
+   res.set('Content-Type', 'text/xml');
+   res.send(message.toString()).status(200);
+   next();
 });
 
 module.exports = router;

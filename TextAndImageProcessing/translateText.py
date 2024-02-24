@@ -10,7 +10,9 @@ def translate_text(target: str, text: str) -> str:
     import os
     import json
     load_dotenv()
+
     API_KEY=os.environ.get("API_KEY")
+    print(API_KEY)
 
     translate_client = translate.Client(client_options={"api_key":API_KEY})
 
