@@ -37,5 +37,5 @@ def detect_handwritten_ocr(url):
 
 if __name__=="__main__":
     # convert("./Test/test3.pdf")
-    print(detect_handwritten_ocr(  "https://AC0a596f880a429fa354df2f18ccc60c22:790227ccd7897b25ee4848cb2483b276@api.twilio.com/2010-04-01/Accounts/AC0a596f880a429fa354df2f18ccc60c22/Messages/MM779d253a1157755d271e231376676d7b/Media/ME80353c34701b29123a50f5dfc721dd7c") 
+    print(detect_handwritten_ocr(  "" ) 
 )

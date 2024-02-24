@@ -1,9 +1,9 @@
-import google.generativeai as palm
+
 import os
 from dotenv import load_dotenv
 import json
 import requests
-
+Type="yes"
 '''
 1. Name of doctor
 2. ⁠Name of hospital
@@ -65,7 +65,7 @@ Common tests:
 Department and lab name also can be used
 '''
 
-def Text_Feature_Extraction(text:str) -> str:
+def Text_Feature_Extraction(text:str,url:str) -> str:
 
     load_dotenv()
     API_KEY=os.environ.get("PALM_KEY")
@@ -73,14 +73,15 @@ def Text_Feature_Extraction(text:str) -> str:
     headers = {"Content-Type": "application/json"}
     
     prompt1=f"{text} is this is a lab test? (Yes/No)"
+
     data = {"contents": [{"parts": [{"text": prompt1}]}]}
     response=requests.post(endpoint,headers=headers,json=data)
     if response.status_code!=200:
         raise Exception("Could not communicate with api")
-    print(response.json())
-    Type=response.json()["candidates"][0]["content"]["parts"][0]["text"]
+#     print(response.json())
+    Type1=response.json()["candidates"][0]["content"]["parts"][0]["text"]
 
-    if("No" in Type):
+    if("yes" in Type.lower()):
         clinical='''
     1. Name of doctor\n
     2. ⁠Name of hospital\n
@@ -99,11 +100,12 @@ def Text_Feature_Extraction(text:str) -> str:
                 raise Exception("Could not communicate with api")
         
         result=response.json()["candidates"][0]["content"]["parts"][0]["text"]
-        result["Type"]="Prescription"
+        # result["Type"]="Prescription"
+        # result["url"]=url
         with open("./TextAndImageProcessing/JSON/output.json","w") as fh:
                 json.dump({"response":result},fh)
         
-    elif("yes" in Type.lower()):
+    elif("no" in Type.lower()):
       categories='''Complete Blood Count\n \
                 Blood Glucose\n \
                 Lipid Profile\n \
@@ -127,7 +129,8 @@ def Text_Feature_Extraction(text:str) -> str:
       if response.status_code!=200:
         raise Exception("Could not communicate with api")
       result=response.json()["candidates"][0]["content"]["parts"][0]["text"]
-      result["Type"]="Lab"
+#       result["Type"]="Lab"
+#       result["url"]=url
       with open("./TextAndImageProcessing/JSON/output.json","w") as fh:
           json.dump({"response":result},fh)
         
