@@ -27,7 +27,7 @@ router.post('/', async (req, res, next) => {
       message = new MessagingResponse().message("Got the report!");
       message.media(accessibleUrl);
    } else {
-      message = new MessagingResponse().message("Send a report");
+      message = new MessagingResponse().message("yeah you can send a report");
    }
 
    res.set('Content-Type', 'text/xml');
