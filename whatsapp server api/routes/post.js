@@ -19,7 +19,7 @@ router.post('/', async (req, res, next) => {
    // console.log(body);
 
    if (body.NumMedia > 0) {
-      const url = body[`MediaUrl${i}`]
+      const url = body[`MediaUrl0`]
       const accessibleUrl = "https://" + username + ":" + password + "@" + url.slice(8);
 
       console.log(accessibleUrl);
