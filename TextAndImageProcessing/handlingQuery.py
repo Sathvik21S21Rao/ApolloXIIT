@@ -1,5 +1,6 @@
 import requests,json,os
 from dotenv import load_dotenv
+import google.generativeai as genai
 def HandleQuery(query:str):
     load_dotenv()
     PALM_KEY=os.environ.get('PALM_KEY')
@@ -14,21 +15,21 @@ def HandleQuery(query:str):
     try:
         result=response.json()["candidates"][0]["content"]["parts"][0]["text"]
         if "Yes" in result:
-            categories='''13a. Complete Blood Count\n \
-                13b. Blood Glucose\n \
-                13c. Lipid Profile\n \
-                13d. Liver Function Test\n \
-                13e. Renal Function Test\n \
-                13f. Thyroid Function Test \
-                13g. X-ray\n \
-                13h. CT Scan\n \
-                13i. ECG\n \
-                13j. 2D – Echo (Echocardiography)\n\
-                13k. Ultrasound\n\
-                13l. MRI\n\
-                13m. Vitamins\n\
-                13n. Urine Analysis\n\
-                13o. sCK-MB and cTN\n'''
+            categories='''"13a". Complete Blood Count\n \
+                "13b". Blood Glucose\n \
+                "13c". Lipid Profile\n \
+                "13d". Liver Function Test\n \
+                "13e". Renal Function Test\n \
+                "13f". Thyroid Function Test \
+                "13g". X-ray\n \
+                "13h. CT Scan\n \
+                "13i". ECG\n \
+                "13j". 2D – Echo (Echocardiography)\n\
+                "13k". Ultrasound\n\
+                "13l". MRI\n\
+                "13m". Vitamins\n\
+                "13n". Urine Analysis\n\
+                "13o". sCK-MB and cTN\n'''
             
             templates='''12. Give details about the last lab test\n
             13. Classify based on report type
@@ -38,6 +39,8 @@ def HandleQuery(query:str):
             data = {"contents": [{"parts": [{"text": prompt}]}]}
             response=requests.post(endpoint,headers=headers,json=data)
             result=response.json()["candidates"][0]["content"]["parts"][0]["text"]
+
+            
             if result=="12":
                 result=["12"]
             if('13' in result):
@@ -48,7 +51,10 @@ def HandleQuery(query:str):
                     raise Exception("Could not communicate with api")
                 result=response.json()["candidates"][0]["content"]["parts"][0]["text"]
             with open("./TextAndImageProcessing/JSON/output.json","w") as fh:
-                
+                if result[0]!="[":
+                    result=[result]
+                else:
+                    result=eval(result)
                 json.dump({0:"Lab",1:"FIND MANY",2:result},fh)
         else:
             
@@ -72,12 +78,17 @@ def HandleQuery(query:str):
             result=response.json()["candidates"][0]["content"]["parts"][0]["text"]
             
             with open("./TextAndImageProcessing/JSON/output.json","w") as fh:
+                if result[0]!="[":
+                    result=[result]
+                else:
+                    result=eval(result)
                 json.dump({0:"Prescription",1:"FIND MANY",2:result},fh)
+
     
     except Exception as e:
         print(e)
         return None
 if __name__=="__main__":
-    print(HandleQuery("Give me the blood report"))
+    print(HandleQuery("Which medicines should i take?"))
     
 
