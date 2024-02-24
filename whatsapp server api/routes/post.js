@@ -11,7 +11,7 @@ const router = express.Router();
 const username = process.env.twilioAccountSid;
 const password = process.env.twilioAuthToken;
 
-const database = require('./database');
+// const database = require('./database');
 
 router.post('/', async (req, res, next) => {
    const { body } = req;
@@ -27,7 +27,7 @@ router.post('/', async (req, res, next) => {
       message = new MessagingResponse().message("Got the image!");
       message.media(accessibleUrl);
    } else {
-
+      message = new MessagingResponse().message("Got the image!");
    }
 
    res.set('Content-Type', 'text/xml');
