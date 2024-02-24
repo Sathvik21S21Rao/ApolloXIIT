@@ -24,10 +24,10 @@ router.post('/', async (req, res, next) => {
 
       console.log(accessibleUrl);
 
-      message = new MessagingResponse().message("Got the image!");
+      message = new MessagingResponse().message("Got the report!");
       message.media(accessibleUrl);
    } else {
-      message = new MessagingResponse().message("Got the image!");
+      message = new MessagingResponse().message("Send a report");
    }
 
    res.set('Content-Type', 'text/xml');
