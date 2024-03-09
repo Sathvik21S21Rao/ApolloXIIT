@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 import json
 import requests
-Type="yes"
+from vertexai.preview.generative_models import GenerativeModel
 '''
 1. Name of doctor
 2. ⁠Name of hospital
@@ -71,15 +71,12 @@ def Text_Feature_Extraction(text:str,url:str) -> str:
     API_KEY=os.environ.get("PALM_KEY")
     endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=" + API_KEY
     headers = {"Content-Type": "application/json"}
-    
+    gemini_pro_model = GenerativeModel("gemini-1.0-pro")
     prompt1=f"{text} is this is a lab test? (Yes/No)"
 
     data = {"contents": [{"parts": [{"text": prompt1}]}]}
-    response=requests.post(endpoint,headers=headers,json=data)
-    if response.status_code!=200:
-        raise Exception("Could not communicate with api")
-#     print(response.json())
-    Type1=response.json()["candidates"][0]["content"]["parts"][0]["text"]
+    response=gemini_pro_model.generate_content(prompt1).to_dict()
+    Type=response["candidates"][0]["content"]["parts"][0]["text"]
 
     if("yes" in Type.lower()):
         clinical='''
@@ -94,14 +91,12 @@ def Text_Feature_Extraction(text:str,url:str) -> str:
         fields=["Doctor","Hospital","Drugs","Amounts","Schedule","Days","Date","Future consultation"]
         field_format='''{"Doctor": "","Hospital": "","Drugs": [],"Amounts": [],"Schedule": "","Days": "","Date": "","Future consultation": ""}'''
         prompt2=f'''Text:{text}\nThis is a medical report, clean the text and extract the following:\n'''+clinical+f"The output should be with field format:{field_format}."
-        data=data = {"contents": [{"parts": [{"text": prompt2}]}]}
-        response=requests.post(endpoint,headers=headers,json=data)
-        if response.status_code!=200:
-                raise Exception("Could not communicate with api")
+        response=gemini_pro_model.generate_content(prompt2).to_dict()
         
-        result=response.json()["candidates"][0]["content"]["parts"][0]["text"]
-        # result["Type"]="Prescription"
-        # result["url"]=url
+        result=response["candidates"][0]["content"]["parts"][0]["text"]
+        result=eval(result)
+        result["Type"]="Prescription"
+        result["url"]=url
         with open("./TextAndImageProcessing/JSON/output.json","w") as fh:
                 json.dump({"response":result},fh)
         
@@ -124,13 +119,11 @@ def Text_Feature_Extraction(text:str,url:str) -> str:
       d={"Doctor Name":"","Hospital Name":"","Date":"","Categories":[]}
       
       prompt2=f"Text:{text}\nCategories:{categories}. Return the Doctor Name,Hospital Name,Date and the categories which the report specifies.Return it in this format {d}"
-      data = {"contents": [{"parts": [{"text": prompt2}]}]}
-      response=requests.post(endpoint,headers=headers,json=data)
-      if response.status_code!=200:
-        raise Exception("Could not communicate with api")
-      result=response.json()["candidates"][0]["content"]["parts"][0]["text"]
-#       result["Type"]="Lab"
-#       result["url"]=url
+      response=gemini_pro_model.generate_content(prompt2).to_dict()
+      result=response["candidates"][0]["content"]["parts"][0]["text"]
+      result=eval(result)
+      result["Type"]="Lab"
+      result["url"]=url
       with open("./TextAndImageProcessing/JSON/output.json","w") as fh:
           json.dump({"response":result},fh)
         
