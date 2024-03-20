@@ -16,21 +16,21 @@ def HandleQuery(query:str):
         result=response["candidates"][0]["content"]["parts"][0]["text"]
         print(result)
         if "Yes" in result:
-            categories='''"14. Complete Blood Count\n \
-                15. Blood Glucose\n \
-                16. Lipid Profile\n \
-                17. Liver Function Test\n \
-                18. Renal Function Test\n \
-                19. Thyroid Function Test \
-                20. X-ray\n \
-                21. CT Scan\n \
-                22. ECG\n \
-                23. 2D – Echo (Echocardiography)\n\
-                24. Ultrasound\n\
-                25. MRI\n\
-                26. Vitamins\n\
-                27. Urine Analysis\n\
-                28. sCK-MB and cTN\n'''
+            categories='''"13. Complete Blood Count\n \
+                14. Blood Glucose\n \
+                15. Lipid Profile\n \
+                16. Liver Function Test\n \
+                17. Renal Function Test\n \
+                18. Thyroid Function Test \
+                19. X-ray\n \
+                20. CT Scan\n \
+                21. ECG\n \
+                22. 2D – Echo (Echocardiography)\n\
+                23. Ultrasound\n\
+                24. MRI\n\
+                25. Vitamins\n\
+                26. Urine Analysis\n\
+                27. sCK-MB and cTN\n'''
             
             templates=f'''Query:{query}.Classify the query based on the given categories\nCategories:\n12. Give details about the last lab test\n
             {categories} Output: Return the list of indices of the categories, which are relevant for the given query.\n'''
