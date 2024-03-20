@@ -9,10 +9,10 @@ const patientSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    drugs: {
+    drugs: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'drugs'
-    },
+    }],
     labs: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'labs'
