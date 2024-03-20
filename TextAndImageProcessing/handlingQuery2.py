@@ -60,17 +60,23 @@ def HandleQuery(query:str):
             10. Hello, how are you?\n
             11. Thank you\n'''
 
-            prompt=f"Query:{query}\nClassify the query based on the given templates\nTemplates:{templates}\n.Output: Return the list of indices of the templates, which are similar to the given query.\n"
+            prompt=f"Query:{query}\nClassify the query based on the given templates\nTemplates:{templates}\n.Output: Return the index, which is the most similar to the given query.\n"
+
             response=gemini_pro_model.generate_content(prompt,safety_settings=None).to_dict()
             result=response["candidates"][0]["content"]["parts"][0]["text"]
-            
+
+            prompt=f"Query:{query}. Extract doctor name or hospital name from query. Strictly return only name."
+            print(prompt)
+            response=gemini_pro_model.generate_content(prompt,safety_settings=None).to_dict()
+            feature=response["candidates"][0]["content"]["parts"][0]["text"]
+
             with open("./TextAndImageProcessing/JSON/output.json","w") as fh:
                 if result[0]!="[":
                     result=[int(result)]
                 else:
                     result=eval(result)
                     result=[int(i) for i in result]
-                json.dump({0:"Prescription",1:"FIND MANY",2:result},fh)
+                json.dump({0:"Prescription",1:"FIND MANY",2:result,3:feature},fh)# omit feature for unnecessary indices
 
     
     except Exception as e:
