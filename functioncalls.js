@@ -9,6 +9,7 @@ function Feature_Extraction(name, callback) {
         callback(stdout.trim());
     });
 }
+
 function Translate_Text(text,callback){
     exec(`python main.py TRANSLATE ${text}`,(error,stdout,stderr) => {
         if(error){
@@ -18,7 +19,6 @@ function Translate_Text(text,callback){
         callback(stdout.trim());
     });
 }
-
 
 // Feature_Extraction('./TextAndImageProcessing/Test/test1.jpeg', (result) => {
 //     console.log(result); 

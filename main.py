@@ -4,6 +4,10 @@ from TextAndImageProcessing.translateText import translate_text
 from TextAndImageProcessing.handlingQuery2 import HandleQuery
 from icecream import ic
 import sys
+import os
+
+credential_path = "./private.json"
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credential_path
 
 if __name__=="__main__":
     # If image, call IMAGE otherwise, do TRANSLATE, pass the stdout input of QUERY
