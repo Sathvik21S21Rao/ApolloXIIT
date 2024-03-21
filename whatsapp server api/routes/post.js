@@ -60,8 +60,8 @@ router.post('/', async (req, res) => {
 
       if (data.Type.toLowerCase() === "lab") {
          let newDate = data.Date;
-         if (data.Date.includes("-")) {
-            newDate = new Date(data.Date.replace('-', '/'));
+         if (data.Date.includes("/")) {
+            newDate = new Date(data.Date.replace('/', '-'), 'dd-mm-yyyy');
          }
          const newLabDoc = new labs({
             doctorName: data['Doctor Name'],
@@ -78,8 +78,8 @@ router.post('/', async (req, res) => {
       }
       else {
          let newDate = data.Date;
-         if (data.Date.includes("-")) {
-            newDate = new Date(data.Date.replace('-', '/'));
+         if (data.Date.includes("/")) {
+            newDate = new Date(data.Date.replace('/', '-'), 'dd-mm-yyyy');
          }
          const newPresDoc = new prescriptions({
             image: data.url,
