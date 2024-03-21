@@ -53,6 +53,8 @@ router.post('/', async (req, res, next) => {
          const translated = fs.readFileSync('/home/ubuntu/ApolloXIIT/TextAndImageProcessing/JSON/Translate_output.json');
          const translatedData = JSON.parse(translated);
          console.log("Translated text:", translatedData);
+
+         
          llmFunctions.Make_Query(result, (result) => {
             console.log("Make_Query result:", result);
             const output = fs.readFileSync('/home/ubuntu/ApolloXIIT/TextAndImageProcessing/JSON/output.json');
