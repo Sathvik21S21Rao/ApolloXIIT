@@ -104,7 +104,7 @@ router.post('/', async (req, res, next) => {
 
    async function handleQueries(data) {
       let res = null;
-      switch (data['2']) {
+      switch (data['2'][0]) {
          case 1:
             res = await dbQueries.query_1(body.From);
             console.log("Query result:", res);
