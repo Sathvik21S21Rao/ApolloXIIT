@@ -223,7 +223,8 @@ router.post('/', async (req, res, next) => {
 
             let resp = await handleQueries(data);
 
-            message = new MessagingResponse().message(resp);
+            console.log(resp);
+            message = new MessagingResponse().message(resp);   
 
             res.set('Content-Type', 'text/xml');
             res.status(200).send(message.toString());
