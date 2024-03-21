@@ -59,10 +59,14 @@ router.post('/', async (req, res) => {
       }
 
       if (data.Type.toLowerCase() === "lab") {
+         let newDate = data.Date;
+         if (data.Date.includes("-")) {
+            newDate = new Date(data.Date.replace('-', '/'));
+         }
          const newLabDoc = new labs({
             doctorName: data['Doctor Name'],
             hospitalName: data['Hospital Name'],
-            date: new Date(data.Date.replace(/-/g, '/')),
+            date: newDate,
             type: data.Categories,
             image: data.url
          });
@@ -73,11 +77,15 @@ router.post('/', async (req, res) => {
          await newPatient.save();
       }
       else {
+         let newDate = data.Date;
+         if (data.Date.includes("-")) {
+            newDate = new Date(data.Date.replace('-', '/'));
+         }
          const newPresDoc = new prescriptions({
             image: data.url,
             doctor: data['Doctor'],
             hospital: data['Hospital'],
-            date: new Date(data.Date.replace(/-/g, '/')),
+            date: newDate,
             drugs: data['Drugs'],
             futureConsultation: data['Future consultation']
          });
