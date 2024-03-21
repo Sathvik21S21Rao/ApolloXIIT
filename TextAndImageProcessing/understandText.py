@@ -69,7 +69,7 @@ def Text_Feature_Extraction(text:str,url:str) -> str:
 
     load_dotenv()
     API_KEY=os.environ.get("PALM_KEY")
-    endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=" + API_KEY
+#     endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=" + API_KEY
     headers = {"Content-Type": "application/json"}
     gemini_pro_model = GenerativeModel("gemini-1.0-pro")
     prompt1=f"{text} is this is a lab test? (Yes/No)"
