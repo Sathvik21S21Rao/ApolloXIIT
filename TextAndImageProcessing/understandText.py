@@ -97,7 +97,7 @@ def Text_Feature_Extraction(text:str,url:str) -> str:
         result=eval(result)
         result["Type"]="Prescription"
         result["url"]=url
-        with open("./TextAndImageProcessing/JSON/output.json","w") as fh:
+        with open("/home/ubuntu/ApolloXIIT/TextAndImageProcessing/JSON/output.json","w") as fh:
                 json.dump({"response":result},fh)
         
     elif("no" in Type.lower()):
@@ -124,7 +124,7 @@ def Text_Feature_Extraction(text:str,url:str) -> str:
       result=eval(result)
       result["Type"]="Lab"
       result["url"]=url
-      with open("./TextAndImageProcessing/JSON/output.json","w") as fh:
+      with open("/home/ubuntu/ApolloXIIT/TextAndImageProcessing/JSON/output.json","w") as fh:
           json.dump({"response":result},fh)
         
 if __name__=="__main__":
