@@ -191,7 +191,7 @@ router.post('/', async (req, res, next) => {
       // Send res as whatsapp message to the user
       console.log("Query result:", res);
 
-      message = new MessagingResponse().message(res);
+      return res;
    }
 
    if (body.NumMedia > 0) {
@@ -221,7 +221,12 @@ router.post('/', async (req, res, next) => {
             const data = JSON.parse(output);
             console.log("Query data:", data);
 
-            await handleQueries(data);
+            let resp = await handleQueries(data);
+
+            message = new MessagingResponse().message(resp);
+
+            res.set('Content-Type', 'text/xml');
+            res.status(200).send(message.toString());
          });
       });
    }
