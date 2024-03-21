@@ -22,10 +22,12 @@ router.post('/', async (req, res, next) => {
       const accessibleUrl = "https://" + username + ":" + password + "@" + url.slice(8);
 
       llmFunctions.Feature_Extraction(accessibleUrl, (result) => {
-         console.log(result);
+         
       });      
    } else {
-      message = new MessagingResponse().message("yeah you can send a report");
+      llmFunctions.Translate_Text(body.Body, (result) => {
+         console.log(result);
+      });
    }
 
    res.set('Content-Type', 'text/xml');

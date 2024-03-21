@@ -11,7 +11,7 @@ function Feature_Extraction(name, callback) {
 }
 
 function Translate_Text(text,callback){
-    exec(`python main.py TRANSLATE ${text}`,(error,stdout,stderr) => {
+    exec(`python main.py TRANSLATE '${text}'`,(error,stdout,stderr) => {
         if(error){
             console.log(stderr);
             return;
@@ -21,7 +21,7 @@ function Translate_Text(text,callback){
 }
 
 function Make_Query(text, callback){
-    exec(`python main.py QUERY ${text}`,(error,stdout,stderr) => {
+    exec(`python main.py QUERY '${text}'`,(error,stdout,stderr) => {
         if(error){
             console.log(stderr);
             return;
