@@ -20,7 +20,7 @@ const dbQueries = require('../utils/dbQueries');
 
 // const database = require('./database');
 
-router.post('/', async (req, res, next) => {
+router.post('/', async (req, res) => {
    const { body } = req;
 
    // {
@@ -236,7 +236,6 @@ router.post('/', async (req, res, next) => {
          });
       });
    }
-   next();
 });
 
 module.exports = router;
