@@ -31,11 +31,3 @@ function Make_Query(text, callback){
 }
 
 module.exports = { Feature_Extraction, Translate_Text, Make_Query };
-
-// Feature_Extraction('./TextAndImageProcessing/Test/test1.jpeg', (result) => {
-//     console.log(result); 
-// });
-
-Translate_Text("नमस्ते, आप कैसे हैं?",(result)=>{
-    console.log(result)
-});

@@ -18,7 +18,23 @@ const llmFunctions = require('../../functioncalls');
 router.post('/', async (req, res, next) => {
    const { body } = req;
 
-   console.log(body);
+   // {
+   //    SmsMessageSid: 'SM6d3dc24baa0701ee7760e392af153d88',
+   //    NumMedia: '0',
+   //    ProfileName: 'Rahul B',
+   //    MessageType: 'text',
+   //    SmsSid: 'SM6d3dc24baa0701ee7760e392af153d88',
+   //    WaId: '919880050970',
+   //    SmsStatus: 'received',
+   //    Body: 'hello',
+   //    To: 'whatsapp:+14155238886',
+   //    NumSegments: '1',
+   //    ReferralNumMedia: '0',
+   //    MessageSid: 'SM6d3dc24baa0701ee7760e392af153d88',
+   //    AccountSid: 'AC0a596f880a429fa354df2f18ccc60c22',
+   //    From: 'whatsapp:+919880050970',
+   //    ApiVersion: '2010-04-01'
+   //  }
 
    if (body.NumMedia > 0) {
       const url = body[`MediaUrl0`]
@@ -46,8 +62,7 @@ router.post('/', async (req, res, next) => {
       });
    }
 
-   res.set('Content-Type', 'text/xml');
-   res.send(message.toString()).status(200);
+   res.status(200).send("OK");
    next();
 });
 
