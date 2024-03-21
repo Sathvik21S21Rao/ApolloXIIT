@@ -1,7 +1,7 @@
 const { exec } = require('child_process');
 
 function Feature_Extraction(name, callback) {
-    exec(`python3 main.py IMAGE ${name}`, (error, stdout, stderr) => {
+    exec(`python3 /home/ubuntu/ApolloXIIT/main.py IMAGE ${name}`, (error, stdout, stderr) => {
         if (error) {
             console.error(`exec error: ${error}`);
             return;
@@ -11,7 +11,7 @@ function Feature_Extraction(name, callback) {
 }
 
 function Translate_Text(text,callback){
-    exec(`python3 main.py TRANSLATE '${text}'`,(error,stdout,stderr) => {
+    exec(`python3 /home/ubuntu/ApolloXIIT/main.py TRANSLATE '${text}'`,(error,stdout,stderr) => {
         if(error){
             console.log(stderr);
             return;
@@ -21,7 +21,7 @@ function Translate_Text(text,callback){
 }
 
 function Make_Query(text, callback){
-    exec(`python3 main.py QUERY '${text}'`,(error,stdout,stderr) => {
+    exec(`python3 /home/ubuntu/ApolloXIIT/main.py QUERY '${text}'`,(error,stdout,stderr) => {
         if(error){
             console.log(stderr);
             return;
