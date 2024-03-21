@@ -3,4 +3,3 @@ node_modules
 .env*
 private.json
 *.pem
-testScheduler.js
