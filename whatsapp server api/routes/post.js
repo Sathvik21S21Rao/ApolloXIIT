@@ -257,7 +257,7 @@ router.post('/', async (req, res) => {
             console.log(resp);
             message = new MessagingResponse().message(resp);   
 
-            res.set('Content-Type', 'text/xml');
+            // res.set('Content-Type', 'text/xml');
             return res.status(200).send(message.toString());
          });
       });
