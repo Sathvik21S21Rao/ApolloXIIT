@@ -12,9 +12,10 @@ const username = process.env.twilioAccountSid;
 const password = process.env.twilioAuthToken;
 
 const llmFunctions = require('../../functioncalls');
-const dbConnect = require('../../dbConnect');
-const labs = require('../../models/patient_labs');
-const patients = require('../../models/patients');
+const dbConnect = require('../db/connect');
+const labs = require('../models/patient_labs');
+const patients = require('../models/patients');
+const prescriptions = require('../models/prescriptions')
 
 // const database = require('./database');
 
