@@ -11,12 +11,14 @@ const router = express.Router();
 const username = process.env.twilioAccountSid;
 const password = process.env.twilioAuthToken;
 
-const llmFunctions = require('./functioncalls');
+const llmFunctions = require('../../functioncalls');
 
 // const database = require('./database');
 
 router.post('/', async (req, res, next) => {
    const { body } = req;
+
+   console.log(body);
 
    if (body.NumMedia > 0) {
       const url = body[`MediaUrl0`]
