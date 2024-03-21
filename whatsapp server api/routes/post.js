@@ -194,6 +194,7 @@ router.post('/', async (req, res, next) => {
       return res;
    }
 
+   let message = null;
    if (body.NumMedia > 0) {
       const url = body[`MediaUrl0`]
       const accessibleUrl = "https://" + username + ":" + password + "@" + url.slice(8);
@@ -231,12 +232,12 @@ router.post('/', async (req, res, next) => {
 
             console.log(resp);
             message = new MessagingResponse().message(resp);   
-
-            res.set('Content-Type', 'text/xml');
-            res.status(200).send(message.toString());
          });
       });
    }
+
+   res.set('Content-Type', 'text/xml');
+   res.status(200).send(message.toString());
    next();
 });
 
