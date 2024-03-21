@@ -15,7 +15,8 @@ const llmFunctions = require('../../functioncalls');
 const dbConnect = require('../db/connect');
 const labs = require('../models/patient_labs');
 const patients = require('../models/patients');
-const prescriptions = require('../models/prescriptions')
+const prescriptions = require('../models/prescriptions');
+const dbQueries = require('../utils/dbQueries');
 
 // const database = require('./database');
 
@@ -101,6 +102,98 @@ router.post('/', async (req, res, next) => {
       
    }
 
+   async function handleQueries(data) {
+      let res = null;
+      switch (data['2']) {
+         case 1:
+            res = dbQueries.query_1(body.From);
+            break;
+         case 2:
+            res = dbQueries.query_2(body.From);
+            break;
+         case 3:
+            res = dbQueries.query_3(body.From);
+            break;
+         case 4:
+            res = dbQueries.query_4(body.From);
+            break;
+         case 5:
+           res = dbQueries.query_5(body.From, data['3']);
+           break;
+         case 6:
+           res = dbQueries.query_6(body.From, data['3']);
+           break;
+         case 7:
+           res = dbQueries.query_7(body.From, data['3']);
+           break;
+         case 8:
+            res = dbQueries.query_8(body.From, data['3']);
+            break;
+         case 9:
+            res = dbQueries.query_9(body.From, data['3']);
+            break;
+         case 10:
+            res = dbQueries.query_10(body.From);
+            break;
+         case 11:
+            res = dbQueries.query_11(body.From);
+            break;
+         case 12:
+            res = dbQueries.query_12(body.From);
+            break;
+         case 13:
+            res = dbQueries.query_13(body.From);
+            break;
+         case 14:
+            res = dbQueries.query_14(body.From);
+            break;
+         case 27:
+            res = dbQueries.query_27(body.From);
+            break;
+         case 15:
+            res = dbQueries.query_15(body.From);
+            break;
+         case 16:
+            res = dbQueries.query_16(body.From);
+            break;
+         case 17:
+            res = dbQueries.query_17(body.From);
+            break;
+         case 18:
+            res = dbQueries.query_18(body.From);
+            break;
+         case 19:
+            res = dbQueries.query_19(body.From);
+            break;
+         case 20:
+            res = dbQueries.query_20(body.From);
+            break;
+         case 21:
+            res = dbQueries.query_21(body.From);
+            break;
+         case 22:
+            res = dbQueries.query_22(body.From);
+            break;
+         case 23:
+            res = dbQueries.query_23(body.From);
+            break;
+         case 24:
+            res = dbQueries.query_24(body.From);
+            break;
+         case 25:
+            res = dbQueries.query_25(body.From);
+            break;
+         case 26:
+            res = dbQueries.query_26(body.From);
+            break;
+      }
+
+      // Send res as whatsapp message to the user
+      console.log("Query result:", res);
+
+      message = new MessagingResponse().message(res);
+   }
+
    if (body.NumMedia > 0) {
       const url = body[`MediaUrl0`]
       const accessibleUrl = "https://" + username + ":" + password + "@" + url.slice(8);
@@ -122,11 +215,13 @@ router.post('/', async (req, res, next) => {
          console.log("Translated text:", translatedData);
 
          
-         llmFunctions.Make_Query(result, (result) => {
+         llmFunctions.Make_Query(translatedData.translatedText, async (result) => {
             console.log("Make_Query result:", result);
             const output = fs.readFileSync('/home/ubuntu/ApolloXIIT/TextAndImageProcessing/JSON/output.json');
             const data = JSON.parse(output);
             console.log("Query data:", data);
+
+            await handleQueries(data);
          });
       });
    }
