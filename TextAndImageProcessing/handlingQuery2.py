@@ -78,10 +78,10 @@ def HandleQuery(query:str):
             response=gemini_pro_model.generate_content(prompt,safety_settings=None).to_dict()
             feature=response["candidates"][0]["content"]["parts"][0]["text"]
 
-            prompt=f"Query:{query}. Extract date from the query. Strictly return date if it exists else return 'None'"
+            prompt=f"Query:{query}. Extract date from the query. Strictly return date in DD-MM-YYYY format if it exists else return 'None'"
             response=gemini_pro_model.generate_content(prompt,safety_settings=None).to_dict()
             date=response["candidates"][0]["content"]["parts"][0]["text"]
-            
+            print(date)
             with open("/home/ubuntu/ApolloXIIT/TextAndImageProcessing/JSON/output.json","w") as fh:
                 if result[0]!="[":
                     result=[int(result)]
@@ -95,6 +95,6 @@ def HandleQuery(query:str):
         print(e)
         return None
 if __name__=="__main__":
-    print(HandleQuery("comedian u are"))
+    print(HandleQuery("send prescriptions from 6/9/2023"))
     
 
