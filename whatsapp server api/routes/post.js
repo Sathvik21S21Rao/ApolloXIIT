@@ -219,7 +219,7 @@ router.post('/', async (req, res, next) => {
             console.log("Make_Query result:", result);
             const output = fs.readFileSync('/home/ubuntu/ApolloXIIT/TextAndImageProcessing/JSON/output.json');
 
-            const data = output;
+            let data = output;
 
             if (typeof output === 'object') {
                data = JSON.parse(output);
