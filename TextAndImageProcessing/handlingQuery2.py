@@ -65,9 +65,10 @@ def HandleQuery(query:str):
             8. Send prescription from xyz doctor\n
             9. Send prescription from some date\n
             10. Hello, how are you?\n
-            11. Thank you\n'''
+            11. Thank you\n
+            '''
 
-            prompt=f"Query:{query}\nClassify the query based on the given templates\nTemplates:{templates}\n.Output: Return the index, which is the most similar to the given query.\n"
+            prompt=f"Query:{query}\nClassify the query based on the given templates\nTemplates:{templates}\n.Output: Return the index, which is the most similar to the given query else return 29 if unrelated to all.\n"
 
             response=gemini_pro_model.generate_content(prompt,safety_settings=None).to_dict()
             result=response["candidates"][0]["content"]["parts"][0]["text"]
@@ -94,6 +95,6 @@ def HandleQuery(query:str):
         print(e)
         return None
 if __name__=="__main__":
-    print(HandleQuery("give prescriptions from 6/9/2022?"))
+    print(HandleQuery("comedian u are"))
     
 
