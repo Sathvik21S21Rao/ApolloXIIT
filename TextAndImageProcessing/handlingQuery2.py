@@ -39,7 +39,7 @@ def HandleQuery(query:str):
             response=gemini_pro_model.generate_content(templates,safety_settings=None).to_dict()
             result=response["candidates"][0]["content"]["parts"][0]["text"]
             
-            with open("./TextAndImageProcessing/JSON/output.json","w") as fh:
+            with open("/home/ubuntu/ApolloXIIT/TextAndImageProcessing/JSON/output.json","w") as fh:
                 if result[0]!="[":
                     result=[int(result)]
                 else:
@@ -73,23 +73,27 @@ def HandleQuery(query:str):
             result=response["candidates"][0]["content"]["parts"][0]["text"]
 
             prompt=f"Query:{query}. Extract doctor name or hospital name from query. Strictly return only name."
-            print(prompt)
+        
             response=gemini_pro_model.generate_content(prompt,safety_settings=None).to_dict()
             feature=response["candidates"][0]["content"]["parts"][0]["text"]
 
-            with open("./TextAndImageProcessing/JSON/output.json","w") as fh:
+            prompt=f"Query:{query}. Extract date from the query. Strictly return date if it exists else return 'None'"
+            response=gemini_pro_model.generate_content(prompt,safety_settings=None).to_dict()
+            date=response["candidates"][0]["content"]["parts"][0]["text"]
+            
+            with open("/home/ubuntu/ApolloXIIT/TextAndImageProcessing/JSON/output.json","w") as fh:
                 if result[0]!="[":
                     result=[int(result)]
                 else:
                     result=eval(result)
                     result=[int(i) for i in result]
-                json.dump({0:"Prescription",1:"FIND MANY",2:result,3:feature},fh)# omit feature for unnecessary indices
+                json.dump({0:"Prescription",1:"FIND MANY",2:result,3:feature,4:date},fh)# omit feature for unnecessary indices
 
     
     except Exception as e:
         print(e)
         return None
 if __name__=="__main__":
-    print(HandleQuery("Which medicines should i take?"))
+    print(HandleQuery("give prescriptions from 6/9/2022?"))
     
 
