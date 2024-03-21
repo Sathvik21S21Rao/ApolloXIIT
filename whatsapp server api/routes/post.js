@@ -107,138 +107,84 @@ router.post('/', async (req, res, next) => {
       switch (data['2'][0]) {
          case 1:
             res = await dbQueries.query_1(body.From);
-            console.log("Query result:", res);
-            message = new MessagingResponse().message(res);
             break;
          case 2:
             res = await dbQueries.query_2(body.From);
-            console.log("Query result:", res);
-            message = new MessagingResponse().message(res);
             break;
          case 3:
             res = await dbQueries.query_3(body.From);
-            console.log("Query result:", res);
-            message = new MessagingResponse().message(res);
             break;
          case 4:
             res = await dbQueries.query_4(body.From);
-            console.log("Query result:", res);
-            message = new MessagingResponse().message(res);
             break;
          case 5:
             res = await dbQueries.query_5(body.From, data['3']);
-            console.log("Query result:", res);
-            message = new MessagingResponse().message(res);
             break;
          case 6:
             res = await dbQueries.query_6(body.From, data['3']);
-            console.log("Query result:", res);
-            message = new MessagingResponse().message(res);
             break;
          case 7:
             res = await dbQueries.query_7(body.From, data['3']);
-            console.log("Query result:", res);
-            message = new MessagingResponse().message(res);
             break;
          case 8:
             res = await dbQueries.query_8(body.From, data['3']);
-            console.log("Query result:", res);
-            message = new MessagingResponse().message(res);
             break;
          case 9:
             res = await dbQueries.query_9(body.From, data['3']);
-            console.log("Query result:", res);
-            message = new MessagingResponse().message(res);
             break;
          case 10:
             res = await dbQueries.query_10(body.From);
-            console.log("Query result:", res);
-            message = new MessagingResponse().message(res);
             break;
          case 11:
             res = await dbQueries.query_11(body.From);
-            console.log("Query result:", res);
-            message = new MessagingResponse().message(res);
             break;
          case 12:
             res = await dbQueries.query_12(body.From);
-            console.log("Query result:", res);
-            message = new MessagingResponse().message(res);
             break;
          case 13:
             res = await dbQueries.query_13(body.From);
-            console.log("Query result:", res);
-            message = new MessagingResponse().message(res);
             break;
          case 14:
             res = await dbQueries.query_14(body.From);
-            console.log("Query result:", res);
-            message = new MessagingResponse().message(res);
             break;
          case 27:
             res = await dbQueries.query_27(body.From);
-            console.log("Query result:", res);
-            message = new MessagingResponse().message(res);
             break;
          case 15:
             res = await dbQueries.query_15(body.From);
-            console.log("Query result:", res);
-            message = new MessagingResponse().message(res);
             break;
          case 16:
             res = await dbQueries.query_16(body.From);
-            console.log("Query result:", res);
-            message = new MessagingResponse().message(res);
             break;
          case 17:
             res = await dbQueries.query_17(body.From);
-            console.log("Query result:", res);
-            message = new MessagingResponse().message(res);
             break;
          case 18:
             res = await dbQueries.query_18(body.From);
-            console.log("Query result:", res);
-            message = new MessagingResponse().message(res);
             break;
          case 19:
             res = await dbQueries.query_19(body.From);
-            console.log("Query result:", res);
-            message = new MessagingResponse().message(res);
             break;
          case 20:
             res = await dbQueries.query_20(body.From);
-            console.log("Query result:", res);
-            message = new MessagingResponse().message(res);
             break;
          case 21:
             res = await dbQueries.query_21(body.From);
-            console.log("Query result:", res);
-            message = new MessagingResponse().message(res);
             break;
          case 22:
             res = await dbQueries.query_22(body.From);
-            console.log("Query result:", res);
-            message = new MessagingResponse().message(res);
             break;
          case 23:
             res = await dbQueries.query_23(body.From);
-            console.log("Query result:", res);
-            message = new MessagingResponse().message(res);
             break;
          case 24:
             res = await dbQueries.query_24(body.From);
-            console.log("Query result:", res);
-            message = new MessagingResponse().message(res);
             break;
          case 25:
             res = await dbQueries.query_25(body.From);
-            console.log("Query result:", res);
-            message = new MessagingResponse().message(res);
             break;
          case 26:
             res = await dbQueries.query_26(body.From);
-            console.log("Query result:", res);
-            message = new MessagingResponse().message(res);
             break;
       }
 
