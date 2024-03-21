@@ -1,5 +1,5 @@
 // Patient_lab->id,type of lab report
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const labSchema = new mongoose.Schema({
     patient_id: {
@@ -28,4 +28,4 @@ const labSchema = new mongoose.Schema({
     }
 });
 
-export default mongoose.models.labs || mongoose.model('labs', labSchema, 'labs');
+module.exports = mongoose.models.labs || mongoose.model('labs', labSchema, 'labs');

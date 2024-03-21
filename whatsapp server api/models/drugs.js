@@ -1,5 +1,5 @@
 // Drug-> patient_id,schedule,amount
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const drugSchema = new mongoose.Schema({
     nameOfDrug: {
@@ -16,4 +16,4 @@ const drugSchema = new mongoose.Schema({
     }
 });
 
-export default mongoose.models.drugs || mongoose.model('drugs', drugSchema, 'drugs');
+module.exports = mongoose.models.drugs || mongoose.model('drugs', drugSchema, 'drugs');

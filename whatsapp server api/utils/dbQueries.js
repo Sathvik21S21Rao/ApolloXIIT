@@ -1,18 +1,23 @@
-import dbConnect from "../db/connect";
-import patients from "../models/patients";
+const dbConnect = require('../db/connect');
+const patients = require('../models/patients');
 
 // 1. Give details about the last doctor appointment
-export async function query_1(patient_phone) {
+async function query_1(patient_phone) {
     await dbConnect();
+
     const patient = await patients.findOne({ phone: patient_phone }).populate('prescriptions');
-    const prescriptions = patient.prescriptions;
+
+    if (!patient) {
+        return "Patient not found!";
+    }
+    const pres = patient.prescriptions;
 
     let lastDate = new Date(0);
     let lastPrescription = null;
-    for (let i = 0; i < prescriptions.length; i++) {
-        if (prescriptions[i].date > lastDate) {
-            lastDate = prescriptions[i].date;
-            lastPrescription = prescriptions[i];
+    for (let i = 0; i < pres.length; i++) {
+        if (pres[i].date > lastDate) {
+            lastDate = pres[i].date;
+            lastPrescription = pres[i];
         }
     }
 
@@ -20,10 +25,12 @@ export async function query_1(patient_phone) {
 }
 
 // 2. What are the next appointment?
-export async function query_2(patient_phone) {
+async function query_2(patient_phone) {
     await dbConnect();
     const patient = await patients.findOne({ phone: patient_phone }).populate('prescriptions');
-
+    if (!patient) {
+        return "Patient not found!";
+    }
     const prescriptions = patient.prescriptions;
     let appointments = [];
     for (let i = 0; i < prescriptions.length; i++) {
@@ -36,21 +43,27 @@ export async function query_2(patient_phone) {
 }
 
 // 3. Which medicines should I take?
-export async function query_3(patient_phone) {
+async function query_3(patient_phone) {
     await dbConnect();
     const patient = await patients.findOne({ phone: patient_phone }).populate('drugs');
+    if (!patient) {
+        return "Patient not found!";
+    }
     return patient.drugs;
 }
 
 // 4. Send the latest prescription
-export async function query_4(patient_phone) {
+async function query_4(patient_phone) {
     return await query_1(patient_phone);
 }
 
 // 5. Give details about the appointments with doctor_name
-export async function query_5(patient_phone, doctor_name) {
+async function query_5(patient_phone, doctor_name) {
     await dbConnect();
     const patient = await patients.findOne({ phone: patient_phone }).populate('prescriptions');
+    if (!patient) {
+        return "Patient not found!";
+    }
     const prescriptions = patient.prescriptions;
 
     let doctorAppointments = [];
@@ -64,9 +77,12 @@ export async function query_5(patient_phone, doctor_name) {
 }
 
 // 6. Give all appointments from xyz hospital
-export async function query_6(patient_phone, hospital_name) {
+async function query_6(patient_phone, hospital_name) {
     await dbConnect();
     const patient = await patients.findOne({ phone: patient_phone }).populate('prescriptions');
+    if (!patient) {
+        return "Patient not found!";
+    }
     const prescriptions = patient.prescriptions;
 
     let hospitalAppointments = [];
@@ -80,9 +96,12 @@ export async function query_6(patient_phone, hospital_name) {
 }
 
 // 7. Send prescription from xyz hospital
-export async function query_7(patient_phone, hospital_name) {
+async function query_7(patient_phone, hospital_name) {
     await dbConnect();
     const patient = await patients.findOne({ phone: patient_phone }).populate('prescriptions');
+    if (!patient) {
+        return "Patient not found!";
+    }
     const prescriptions = patient.prescriptions;
 
     let hospitalPrescriptions = [];
@@ -96,9 +115,12 @@ export async function query_7(patient_phone, hospital_name) {
 }
 
 // 8. Send prescription from xyz doctor
-export async function query_8(patient_phone, doctor_name) {
+async function query_8(patient_phone, doctor_name) {
     await dbConnect();
     const patient = await patients.findOne({ phone: patient_phone }).populate('prescriptions');
+    if (!patient) {
+        return "Patient not found!";
+    }
     const prescriptions = patient.prescriptions;
 
     let doctorPrescriptions = [];
@@ -112,9 +134,12 @@ export async function query_8(patient_phone, doctor_name) {
 }
 
 // 9. Send prescription from some date
-export async function query_9(patient_phone, date) {
+async function query_9(patient_phone, date) {
     await dbConnect();
     const patient = await patients.findOne({ phone: patient_phone }).populate('prescriptions');
+    if (!patient) {
+        return "Patient not found!";
+    }
     const prescriptions = patient.prescriptions;
 
     let datePrescriptions = [];
@@ -128,19 +153,22 @@ export async function query_9(patient_phone, date) {
 }
 
 // 10. Hello, how are you?
-export async function query_10() {
+async function query_10() {
     return "I am fine, thank you!";
 }
 
 // 11. Thank you
-export async function query_11() {
+async function query_11() {
     return "You are welcome!";
 }
 
 // 12. Give details about the last lab test
-export async function query_12(patient_phone) {
+async function query_12(patient_phone) {
     await dbConnect();
     const patient = await patients.findOne({ phone: patient_phone }).populate('labs');
+    if (!patient) {
+        return "Patient not found!";
+    }
     const labs = patient.labs;
 
     let lastDate = new Date(0);
@@ -157,9 +185,12 @@ export async function query_12(patient_phone) {
 }
 
 // 13. Complete Blood Count
-export async function query_13(patient_phone) {
+async function query_13(patient_phone) {
     await dbConnect();
     const patient = await patients.findOne({ phone: patient_phone }).populate('labs');
+    if (!patient) {
+        return "Patient not found!";
+    }
     const labs = patient.labs;
 
     let cbc = [];
@@ -173,9 +204,12 @@ export async function query_13(patient_phone) {
 }
 
 // 14. Blood Glucose
-export async function query_14(patient_phone) {
+async function query_14(patient_phone) {
     await dbConnect();
     const patient = await patients.findOne({ phone: patient_phone }).populate('labs');
+    if (!patient) {
+        return "Patient not found!";
+    }
     const labs = patient.labs;
 
     let bg = [];
@@ -189,9 +223,12 @@ export async function query_14(patient_phone) {
 }
 
 // 15. Lipid Profile
-export async function query_15(patient_phone) {
+async function query_15(patient_phone) {
     await dbConnect();
     const patient = await patients.findOne({ phone: patient_phone }).populate('labs');
+    if (!patient) {
+        return "Patient not found!";
+    }
     const labs = patient.labs;
 
     let lp = [];
@@ -205,9 +242,12 @@ export async function query_15(patient_phone) {
 }
 
 // 16. Liver Function Test
-export async function query_16(patient_phone) {
+async function query_16(patient_phone) {
     await dbConnect();
     const patient = await patients.findOne({ phone: patient_phone }).populate('labs');
+    if (!patient) {
+        return "Patient not found!";
+    }
     const labs = patient.labs;
 
     let lft = [];
@@ -221,9 +261,12 @@ export async function query_16(patient_phone) {
 }
 
 // 17. Renal Function Test
-export async function query_17(patient_phone) {
+async function query_17(patient_phone) {
     await dbConnect();
     const patient = await patients.findOne({ phone: patient_phone }).populate('labs');
+    if (!patient) {
+        return "Patient not found!";
+    }
     const labs = patient.labs;
 
     let rft = [];
@@ -237,9 +280,12 @@ export async function query_17(patient_phone) {
 }
 
 // 18. Thyroid Function Test
-export async function query_18(patient_phone) {
+async function query_18(patient_phone) {
     await dbConnect();
     const patient = await patients.findOne({ phone: patient_phone }).populate('labs');
+    if (!patient) {
+        return "Patient not found!";
+    }
     const labs = patient.labs;
 
     let tft = [];
@@ -253,9 +299,12 @@ export async function query_18(patient_phone) {
 }
 
 // 19. X-ray
-export async function query_19(patient_phone) {
+async function query_19(patient_phone) {
     await dbConnect();
     const patient = await patients.findOne({ phone: patient_phone }).populate('labs');
+    if (!patient) {
+        return "Patient not found!";
+    }
     const labs = patient.labs;
 
     let xray = [];
@@ -269,9 +318,12 @@ export async function query_19(patient_phone) {
 }
 
 // 20. CT Scan
-export async function query_20(patient_phone) {
+async function query_20(patient_phone) {
     await dbConnect();
     const patient = await patients.findOne({ phone: patient_phone }).populate('labs');
+    if (!patient) {
+        return "Patient not found!";
+    }
     const labs = patient.labs;
 
     let ct = [];
@@ -285,9 +337,12 @@ export async function query_20(patient_phone) {
 }
 
 // 21. ECG
-export async function query_21(patient_phone) {
+async function query_21(patient_phone) {
     await dbConnect();
     const patient = await patients.findOne({ phone: patient_phone }).populate('labs');
+    if (!patient) {
+        return "Patient not found!";
+    }
     const labs = patient.labs;
 
     let ecg = [];
@@ -301,9 +356,12 @@ export async function query_21(patient_phone) {
 }
 
 // 22. 2D – Echo (Echocardiography)
-export async function query_22(patient_phone) {
+async function query_22(patient_phone) {
     await dbConnect();
     const patient = await patients.findOne({ phone: patient_phone }).populate('labs');
+    if (!patient) {
+        return "Patient not found!";
+    }
     const labs = patient.labs;
 
     let echo = [];
@@ -317,9 +375,12 @@ export async function query_22(patient_phone) {
 }
 
 // 23. Ultrasound
-export async function query_23(patient_phone) {
+async function query_23(patient_phone) {
     await dbConnect();
     const patient = await patients.findOne({ phone: patient_phone }).populate('labs');
+    if (!patient) {
+        return "Patient not found!";
+    }
     const labs = patient.labs;
 
     let us = [];
@@ -333,9 +394,12 @@ export async function query_23(patient_phone) {
 }
 
 // 24. MRI
-export async function query_24(patient_phone) {
+async function query_24(patient_phone) {
     await dbConnect();
     const patient = await patients.findOne({ phone: patient_phone }).populate('labs');
+    if (!patient) {
+        return "Patient not found!";
+    }
     const labs = patient.labs;
 
     let mri = [];
@@ -349,9 +413,12 @@ export async function query_24(patient_phone) {
 }
 
 // 25. Vitamins
-export async function query_25(patient_phone) {
+async function query_25(patient_phone) {
     await dbConnect();
     const patient = await patients.findOne({ phone: patient_phone }).populate('drugs');
+    if (!patient) {
+        return "Patient not found!";
+    }
     const drugs = patient.drugs;
 
     let vitamins = [];
@@ -365,9 +432,12 @@ export async function query_25(patient_phone) {
 }
 
 // 26. Urine Analysis
-export async function query_26(patient_phone) {
+async function query_26(patient_phone) {
     await dbConnect();
     const patient = await patients.findOne({ phone: patient_phone }).populate('labs');
+    if (!patient) {
+        return "Patient not found!";
+    }
     const labs = patient.labs;
 
     let ua = [];
@@ -381,9 +451,12 @@ export async function query_26(patient_phone) {
 }
 
 // 27. sCK-MB and cTN
-export async function query_27(patient_phone) {
+async function query_27(patient_phone) {
     await dbConnect();
     const patient = await patients.findOne({ phone: patient_phone }).populate('labs');
+    if (!patient) {
+        return "Patient not found!";
+    }
     const labs = patient.labs;
 
     let sck = [];
@@ -395,3 +468,33 @@ export async function query_27(patient_phone) {
 
     return sck;
 }
+
+module.exports = {
+    query_1,
+    query_2,
+    query_3,
+    query_4,
+    query_5,
+    query_6,
+    query_7,
+    query_8,
+    query_9,
+    query_10,
+    query_11,
+    query_12,
+    query_13,
+    query_14,
+    query_15,
+    query_16,
+    query_17,
+    query_18,
+    query_19,
+    query_20,
+    query_21,
+    query_22,
+    query_23,
+    query_24,
+    query_25,
+    query_26,
+    query_27
+};

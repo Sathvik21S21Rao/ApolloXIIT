@@ -1,5 +1,5 @@
 // Patient_prescription ->id, Doctor, Hospital,Date,Drugs(multi valued),Futur Consultaion(bool)
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const prescriptionSchema = new mongoose.Schema({
     image: {
@@ -28,4 +28,4 @@ const prescriptionSchema = new mongoose.Schema({
     }
 });
 
-export default mongoose.models.prescriptions || mongoose.model('prescriptions', prescriptionSchema, 'prescriptions');
+module.exports = mongoose.models.prescriptions || mongoose.model('prescriptions', prescriptionSchema, 'prescriptions');

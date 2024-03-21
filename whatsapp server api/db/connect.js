@@ -1,12 +1,16 @@
-import mongoose from "mongoose";
+const mongoose = require('mongoose');
+require('dotenv').config({ path: '../../.env.local'});
 
-export default async function dbConnect() {
+async function dbConnect() {
     if (mongoose.connections[0].readyState) {
         return;
     }
 
-    if (!process.env.MONGODB_URI) {
-        return;
+    let uri = process.env.MONGODB_URI;
+    if (!uri) {
+        uri = 'mongodb://localhost:27017/apolloHackathon'
     }
-    await mongoose.connect(process.env.MONGODB_URI);
+    await mongoose.connect(uri);
 }
+
+module.exports = dbConnect;
