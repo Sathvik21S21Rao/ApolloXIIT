@@ -65,7 +65,7 @@ router.post('/', async (req, res, next) => {
             date: new Date(data.Date.replace(/-/g, '/')),
             type: data.Categories,
             image: data.url
-          });
+         });
 
          await newLabDoc.save();
 
@@ -99,92 +99,146 @@ router.post('/', async (req, res, next) => {
          }
          await newPatient.save();
       }
-      
+
    }
 
    async function handleQueries(data) {
       let res = null;
-      switch (data['2']) {
+      switch (data['2'][0]) {
          case 1:
-            res = dbQueries.query_1(body.From);
+            res = await dbQueries.query_1(body.From);
+            console.log("Query result:", res);
+            message = new MessagingResponse().message(res);
             break;
          case 2:
-            res = dbQueries.query_2(body.From);
+            res = await dbQueries.query_2(body.From);
+            console.log("Query result:", res);
+            message = new MessagingResponse().message(res);
             break;
          case 3:
-            res = dbQueries.query_3(body.From);
+            res = await dbQueries.query_3(body.From);
+            console.log("Query result:", res);
+            message = new MessagingResponse().message(res);
             break;
          case 4:
-            res = dbQueries.query_4(body.From);
+            res = await dbQueries.query_4(body.From);
+            console.log("Query result:", res);
+            message = new MessagingResponse().message(res);
             break;
          case 5:
-           res = dbQueries.query_5(body.From, data['3']);
-           break;
+            res = await dbQueries.query_5(body.From, data['3']);
+            console.log("Query result:", res);
+            message = new MessagingResponse().message(res);
+            break;
          case 6:
-           res = dbQueries.query_6(body.From, data['3']);
-           break;
+            res = await dbQueries.query_6(body.From, data['3']);
+            console.log("Query result:", res);
+            message = new MessagingResponse().message(res);
+            break;
          case 7:
-           res = dbQueries.query_7(body.From, data['3']);
-           break;
+            res = await dbQueries.query_7(body.From, data['3']);
+            console.log("Query result:", res);
+            message = new MessagingResponse().message(res);
+            break;
          case 8:
-            res = dbQueries.query_8(body.From, data['3']);
+            res = await dbQueries.query_8(body.From, data['3']);
+            console.log("Query result:", res);
+            message = new MessagingResponse().message(res);
             break;
          case 9:
-            res = dbQueries.query_9(body.From, data['3']);
+            res = await dbQueries.query_9(body.From, data['3']);
+            console.log("Query result:", res);
+            message = new MessagingResponse().message(res);
             break;
          case 10:
-            res = dbQueries.query_10(body.From);
+            res = await dbQueries.query_10(body.From);
+            console.log("Query result:", res);
+            message = new MessagingResponse().message(res);
             break;
          case 11:
-            res = dbQueries.query_11(body.From);
+            res = await dbQueries.query_11(body.From);
+            console.log("Query result:", res);
+            message = new MessagingResponse().message(res);
             break;
          case 12:
-            res = dbQueries.query_12(body.From);
+            res = await dbQueries.query_12(body.From);
+            console.log("Query result:", res);
+            message = new MessagingResponse().message(res);
             break;
          case 13:
-            res = dbQueries.query_13(body.From);
+            res = await dbQueries.query_13(body.From);
+            console.log("Query result:", res);
+            message = new MessagingResponse().message(res);
             break;
          case 14:
-            res = dbQueries.query_14(body.From);
+            res = await dbQueries.query_14(body.From);
+            console.log("Query result:", res);
+            message = new MessagingResponse().message(res);
             break;
          case 27:
-            res = dbQueries.query_27(body.From);
+            res = await dbQueries.query_27(body.From);
+            console.log("Query result:", res);
+            message = new MessagingResponse().message(res);
             break;
          case 15:
-            res = dbQueries.query_15(body.From);
+            res = await dbQueries.query_15(body.From);
+            console.log("Query result:", res);
+            message = new MessagingResponse().message(res);
             break;
          case 16:
-            res = dbQueries.query_16(body.From);
+            res = await dbQueries.query_16(body.From);
+            console.log("Query result:", res);
+            message = new MessagingResponse().message(res);
             break;
          case 17:
-            res = dbQueries.query_17(body.From);
+            res = await dbQueries.query_17(body.From);
+            console.log("Query result:", res);
+            message = new MessagingResponse().message(res);
             break;
          case 18:
-            res = dbQueries.query_18(body.From);
+            res = await dbQueries.query_18(body.From);
+            console.log("Query result:", res);
+            message = new MessagingResponse().message(res);
             break;
          case 19:
-            res = dbQueries.query_19(body.From);
+            res = await dbQueries.query_19(body.From);
+            console.log("Query result:", res);
+            message = new MessagingResponse().message(res);
             break;
          case 20:
-            res = dbQueries.query_20(body.From);
+            res = await dbQueries.query_20(body.From);
+            console.log("Query result:", res);
+            message = new MessagingResponse().message(res);
             break;
          case 21:
-            res = dbQueries.query_21(body.From);
+            res = await dbQueries.query_21(body.From);
+            console.log("Query result:", res);
+            message = new MessagingResponse().message(res);
             break;
          case 22:
-            res = dbQueries.query_22(body.From);
+            res = await dbQueries.query_22(body.From);
+            console.log("Query result:", res);
+            message = new MessagingResponse().message(res);
             break;
          case 23:
-            res = dbQueries.query_23(body.From);
+            res = await dbQueries.query_23(body.From);
+            console.log("Query result:", res);
+            message = new MessagingResponse().message(res);
             break;
          case 24:
-            res = dbQueries.query_24(body.From);
+            res = await dbQueries.query_24(body.From);
+            console.log("Query result:", res);
+            message = new MessagingResponse().message(res);
             break;
          case 25:
-            res = dbQueries.query_25(body.From);
+            res = await dbQueries.query_25(body.From);
+            console.log("Query result:", res);
+            message = new MessagingResponse().message(res);
             break;
          case 26:
-            res = dbQueries.query_26(body.From);
+            res = await dbQueries.query_26(body.From);
+            console.log("Query result:", res);
+            message = new MessagingResponse().message(res);
             break;
       }
 
@@ -205,7 +259,7 @@ router.post('/', async (req, res, next) => {
          console.log("Feature_Extraction data:", data);
 
          await handleFeatureExtraction(data.response);
-      });      
+      });
    } else {
       // message = new MessagingResponse().message("yeah you can send a report");
       llmFunctions.Translate_Text(body.Body, (result) => {
@@ -214,7 +268,7 @@ router.post('/', async (req, res, next) => {
          const translatedData = JSON.parse(translated);
          console.log("Translated text:", translatedData);
 
-         
+
          llmFunctions.Make_Query(translatedData.translatedText, async (result) => {
             console.log("Make_Query result:", result);
             const output = fs.readFileSync('/home/ubuntu/ApolloXIIT/TextAndImageProcessing/JSON/output.json');
