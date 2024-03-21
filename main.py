@@ -6,7 +6,7 @@ from icecream import ic
 import sys
 import os
 
-credential_path = "./private.json"
+credential_path = "/home/ubuntu/ApolloXIIT/private.json"
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credential_path
 
 if __name__=="__main__":
