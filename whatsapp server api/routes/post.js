@@ -82,7 +82,8 @@ router.post('/', async (req, res) => {
          // newPatient.labs.push(newLabDoc._id);
          // labArr.push(newLabDoc._id);
          // await newPatient.save();
-         await newPatient.updateOne({ $push: { labs: newLabDoc._id } });
+         // await newPatient.updateOne({ $push: { labs: newLabDoc._id } });
+         await patients.updateOne({ phone: body.From }, { $push: { labs: newLabDoc._id } });
       }
       else {
          let newDate = data.Date;
@@ -106,7 +107,8 @@ router.post('/', async (req, res) => {
          await newPresDoc.save();
 
          // newPatient.prescriptions.push(newPresDoc._id);
-         await newPatient.updateOne({ $push: { prescriptions: newPresDoc._id } });
+         // await newPatient.updateOne({ $push: { prescriptions: newPresDoc._id } });
+         await patients.updateOne({ phone: body.From }, { $push: { prescriptions: newPresDoc._id } });
 
          for (let i = 0; i < data['Drugs'].length; i++) {
             const newDrug = new drugs({
@@ -118,7 +120,8 @@ router.post('/', async (req, res) => {
             await newDrug.save();
 
             // newPatient.drugs.push(newDrug._id);
-            await newPatient.updateOne({ $push: { drugs: newDrug._id } });
+            // await newPatient.updateOne({ $push: { drugs: newDrug._id } });
+            await patients.updateOne({ phone: body.From }, { $push: { drugs: newDrug._id } });
          }
          await newPatient.save();
       }
