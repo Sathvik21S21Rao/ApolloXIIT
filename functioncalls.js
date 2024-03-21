@@ -20,6 +20,18 @@ function Translate_Text(text,callback){
     });
 }
 
+function Make_Query(text, callback){
+    exec(`python main.py QUERY ${text}`,(error,stdout,stderr) => {
+        if(error){
+            console.log(stderr);
+            return;
+        }
+        callback(stdout.trim());
+    });
+}
+
+module.exports = { Feature_Extraction, Translate_Text, Make_Query };
+
 // Feature_Extraction('./TextAndImageProcessing/Test/test1.jpeg', (result) => {
 //     console.log(result); 
 // });
