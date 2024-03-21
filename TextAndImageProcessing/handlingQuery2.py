@@ -16,6 +16,7 @@ def HandleQuery(query:str):
         result=response["candidates"][0]["content"]["parts"][0]["text"]
         print(result)
         if "Yes" in result:
+            # 13 -> 
             categories='''"13. Complete Blood Count\n \
                 14. Blood Glucose\n \
                 15. Lipid Profile\n \
@@ -46,7 +47,13 @@ def HandleQuery(query:str):
                     result=[int(i) for i in result]
                 json.dump({0:"Lab",1:"FIND MANY",2:result},fh)
         else:
-            
+            # 1 -> Latest date in prescriptions
+            # 2 -> If bool thing is true
+            # 3 -> drugs array
+            # 4 -> same as 1
+            # 5 -> prescriptions array with specific doc_name
+            # 6 -> prescriptions array with specific hospital with futureConsultation is true
+            # 7 -> 
             templates='''
             1. Give details about the last doctor appointment\m
             2. What are the next appointment?\n

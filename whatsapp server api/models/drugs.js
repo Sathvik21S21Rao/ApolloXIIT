@@ -2,7 +2,7 @@
 import mongoose from 'mongoose';
 
 const drugSchema = new mongoose.Schema({
-    patient_id: {
+    nameOfDrug: {
         type: String,
         required: true
     },

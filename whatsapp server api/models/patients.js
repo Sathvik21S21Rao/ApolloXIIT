@@ -13,14 +13,14 @@ const patientSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'drugs'
     }],
-    labs: {
+    labs: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'labs'
-    },
-    prescriptions: {
+    }],
+    prescriptions: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'prescriptions'
-    }
+    }]
 });
 
 export default mongoose.models.patients || mongoose.model('patients', patientSchema, 'patients');

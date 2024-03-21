@@ -6,6 +6,7 @@ from icecream import ic
 import sys
 
 if __name__=="__main__":
+    # If image, call IMAGE otherwise, do TRANSLATE, pass the stdout input of QUERY
     if(sys.argv[1]=="IMAGE"):
         print(Text_Feature_Extraction(detect_handwritten_ocr(sys.argv[2]),sys.argv[2]))
     if(sys.argv[1]=="TRANSLATE"):

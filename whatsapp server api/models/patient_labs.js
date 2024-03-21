@@ -6,8 +6,20 @@ const labSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    type: {
+    doctorName: {
         type: String,
+        required: true
+    },
+    hospitalName: {
+        type: String,
+        required: true
+    },
+    date: {
+        type: Date,
+        required: true
+    },
+    type: {
+        type: [String],
         required: true
     },
     image: {
