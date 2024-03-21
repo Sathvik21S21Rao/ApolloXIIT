@@ -415,16 +415,16 @@ async function query_24(patient_phone) {
 // 25. Vitamins
 async function query_25(patient_phone) {
     await dbConnect();
-    const patient = await patients.findOne({ phone: patient_phone }).populate('drugs');
+    const patient = await patients.findOne({ phone: patient_phone }).populate('labs');
     if (!patient) {
         return "Patient not found!";
     }
-    const drugs = patient.drugs;
+    const labs = patient.labs;
 
     let vitamins = [];
-    for (let i = 0; i < drugs.length; i++) {
-        if (drugs[i].nameOfDrug.includes("Vitamin")) {
-            vitamins.push(drugs[i]);
+    for (let i = 0; i < labs.length; i++) {
+        if (labs[i].type.includes("Vitamin")) {
+            vitamins.push(labs[i]);
         }
     }
 
