@@ -6,7 +6,7 @@ def HandleQuery(query:str):
     load_dotenv()
     PALM_KEY=os.environ.get('PALM_KEY')
     gemini_pro_model = GenerativeModel("gemini-1.0-pro")
-    endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=" + PALM_KEY
+    # endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=" + PALM_KEY
     headers = {"Content-Type": "application/json"}
     prompt=f'''"Query:{query}\nIs the query related to medical lab report?. Output : Yes or No'''
     data = {"contents": [{"parts": [{"text": prompt}]}]}
