@@ -118,7 +118,7 @@ def Text_Feature_Extraction(text:str,url:str) -> str:
                 CK-MB and cTN\n'''
       d={"Doctor Name":"","Hospital Name":"","Date":"","Categories":[]}
       
-      prompt2=f"Text:{text}\nCategories:{categories}. Return the Doctor Name,Hospital Name,Date and the categories which the report specifies.Return it in this format {d}"
+      prompt2=f"Text:{text}\nCategories:{categories}. Return the Doctor Name,Hospital Name,Date(in the form DD-MM-YYYY) and the categories which the report specifies.Return it in this format {d}"
       response=gemini_pro_model.generate_content(prompt2).to_dict()
       result=response["candidates"][0]["content"]["parts"][0]["text"]
       print(result)
