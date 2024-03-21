@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-require('dotenv').config({ path: '../../.env.local'});
+require('dotenv').config({ path: '.env.local'});
 
 async function dbConnect() {
     if (mongoose.connections[0].readyState) {
