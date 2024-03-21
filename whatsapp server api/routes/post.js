@@ -26,7 +26,7 @@ router.post('/', async (req, res, next) => {
 
       llmFunctions.Feature_Extraction(accessibleUrl, (result) => {
          console.log(result);
-         const output = fs.readFileSync('./TextAndImageProcessing/JSON/output.json');
+         const output = fs.readFileSync('/home/ubuntu/ApolloXIIT/TextAndImageProcessing/JSON/output.json');
          const data = JSON.parse(output);
          console.log("Feature_Extraction data:", data);
       });      
@@ -34,12 +34,12 @@ router.post('/', async (req, res, next) => {
       // message = new MessagingResponse().message("yeah you can send a report");
       llmFunctions.Translate_Text(body.Body, (result) => {
          console.log("Translate_Text Result:", result);
-         const translated = fs.readFileSync('./TextAndImageProcessing/JSON/Translate_output.json');
+         const translated = fs.readFileSync('/home/ubuntu/ApolloXIIT/TextAndImageProcessing/JSON/Translate_output.json');
          const translatedData = JSON.parse(translated);
          console.log("Translated text:", translatedData);
          llmFunctions.Make_Query(result, (result) => {
             console.log("Make_Query result:", result);
-            const output = fs.readFileSync('./TextAndImageProcessing/JSON/output.json');
+            const output = fs.readFileSync('/home/ubuntu/ApolloXIIT/TextAndImageProcessing/JSON/output.json');
             const data = JSON.parse(output);
             console.log("Query data:", data);
          });
