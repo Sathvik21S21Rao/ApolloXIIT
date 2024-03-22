@@ -323,7 +323,7 @@ router.post('/', async (req, res) => {
                   return res.status(200).send(message.toString());
                }
                
-               if (typeof resp === 'array' && resp[0].image) {
+               if (resp[0] && resp[0].image) {
                   message = new MessagingResponse().message("Here u go!");
                   message.media(resp[0].image);
                   return res.status(200).send(message.toString());
