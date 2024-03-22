@@ -43,12 +43,15 @@ function OBJtoXML(obj) {
 
  function jsonToXml(json) {
    let xml = '';
+   let visited = new Set();
 
    // Recursive function to build XML
    function buildXml(obj) {
+       visited.add(obj);
+
        for (let key in obj) {
            if (obj.hasOwnProperty(key)) {
-               if (typeof obj[key] === 'object') {
+               if (typeof obj[key] === 'object' && !visited.has(obj[key])) {
                    xml += `<${key}>`;
                    buildXml(obj[key]);
                    xml += `</${key}>`;
