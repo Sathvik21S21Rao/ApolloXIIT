@@ -305,11 +305,11 @@ router.post('/', async (req, res) => {
 
             let resp = await handleQueries(data);
 
-            if (typeof resp === 'object') {
-               resp = jsonToXml(resp);
+            if (resp.image) {
+               const message = new MessagingResponse().media(resp.image);
+               return res.status(200).send(message.toString());
             }
-
-            console.log("Query result:", resp);
+         
             message = new MessagingResponse().message(resp);   
 
             // res.set('Content-Type', 'text/xml');
