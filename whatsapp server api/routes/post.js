@@ -263,6 +263,9 @@ router.post('/', async (req, res) => {
             case 26:
                respone = await dbQueries.query_26(body.From);
                break;
+            case 29:
+               respone = "I couldn't understand your query. Please try again.";
+               break;
          }
    
          // Send respone as whatsapp message to the user
@@ -321,7 +324,6 @@ router.post('/', async (req, res) => {
       const message = new MessagingResponse().message("Unexpected error, occurred. Please try again.");
       return res.status(200).send(message.toString());
    }
-
 });
 
 module.exports = router;
