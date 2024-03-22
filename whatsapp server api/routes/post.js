@@ -321,8 +321,9 @@ router.post('/', async (req, res) => {
                   message.media(resp.image);
                   return res.status(200).send(message.toString());
                }
-            
-               message = new MessagingResponse().message(resp);   
+               
+               console.log(resp);
+               message = new MessagingResponse().message(resp);      
    
                // res.set('Content-Type', 'text/xml');
                return res.status(200).send(message.toString());
