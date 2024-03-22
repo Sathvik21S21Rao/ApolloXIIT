@@ -41,6 +41,31 @@ function OBJtoXML(obj) {
    return xml
  }
 
+ function jsonToXml(json) {
+   let xml = '';
+
+   // Recursive function to build XML
+   function buildXml(obj) {
+       for (let key in obj) {
+           if (obj.hasOwnProperty(key)) {
+               if (typeof obj[key] === 'object') {
+                   xml += `<${key}>`;
+                   buildXml(obj[key]);
+                   xml += `</${key}>`;
+               } else {
+                   xml += `<${key}>${obj[key]}</${key}>`;
+               }
+           }
+       }
+   }
+
+   // Starting the XML structure
+   xml += '<?xml version="1.0" encoding="UTF-8"?>';
+   buildXml(json);
+
+   return xml;
+}
+
 router.post('/', async (req, res) => {
    const { body } = req;
 
@@ -278,7 +303,7 @@ router.post('/', async (req, res) => {
             let resp = await handleQueries(data);
 
             if (typeof resp === 'object') {
-               resp = OBJtoXML(resp);
+               resp = jsonToXml(resp);
             }
 
             console.log("Query result:", resp);
