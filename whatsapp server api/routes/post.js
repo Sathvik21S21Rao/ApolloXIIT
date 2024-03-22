@@ -179,7 +179,7 @@ router.post('/', async (req, res) => {
 
    async function handleQueries(data) {
       let respone = null;
-      switch (data['2'][0]) {
+      switch (data['2'][0] || data['2']) {
          case 1:
             respone = await dbQueries.query_1(body.From);
             break;
