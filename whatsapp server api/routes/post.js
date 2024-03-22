@@ -297,6 +297,9 @@ router.post('/', async (req, res) => {
    
             await handleFeatureExtraction(data.response);
          });
+
+         const message = new MessagingResponse().message("Image received successfully!");
+         return res.status(200).send(message.toString());
       } else {
          // message = new MessagingResponse().message("yeah you can send a report");
          llmFunctions.Translate_Text(body.Body, (result) => {
