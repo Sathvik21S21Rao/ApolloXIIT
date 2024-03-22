@@ -315,6 +315,7 @@ router.post('/', async (req, res) => {
                console.log("Query data:", data);
    
                let resp = await handleQueries(data);
+               console.log("Type of response: ", typeof resp);
 
                if (typeof resp === 'object' && resp.image) {
                   message = new MessagingResponse().message("Here u go!");
