@@ -306,6 +306,11 @@ router.post('/', async (req, res) => {
    
                let resp = await handleQueries(data);
    
+               if (typeof resp === 'string') {
+                  message = new MessagingResponse().message(resp);
+                  return res.status(200).send(message.toString());
+               }
+
                if (resp.image) {
                   message = new MessagingResponse().message(resp.message);
                   message.media(resp.image);
