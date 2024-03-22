@@ -111,7 +111,10 @@ router.post('/', async (req, res) => {
    
          if (data.Type.toLowerCase() === "lab") {
             let newDate = data.Date;
-            if (data.Date.includes("/")) {
+
+            if (!data.Date) {
+               data.Date = new Date();
+            } else if (data.Date.includes("/")) {
                let x = data.Date.split("/").reverse();
                newDate = new Date(...x);
             }
@@ -137,7 +140,10 @@ router.post('/', async (req, res) => {
          }
          else {
             let newDate = data.Date;
-            if (data.Date.includes("/")) {
+
+            if (!data.Date) {
+               data.Date = new Date();
+            } else if (data.Date.includes("/")) {
                let x = data.Date.split("/").reverse();
                newDate = new Date(...x);
             }
