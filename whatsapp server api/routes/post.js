@@ -303,7 +303,8 @@ router.post('/', async (req, res) => {
             let resp = await handleQueries(data);
 
             if (resp.image) {
-               const message = new MessagingResponse().media(resp.image);
+               message = new MessagingResponse().message(resp.message);
+               message.media(resp.image);
                return res.status(200).send(message.toString());
             }
          
