@@ -294,9 +294,9 @@ router.post('/', async (req, res) => {
 
          llmFunctions.Make_Query(translatedData.translatedText, async (result) => {
             console.log("Make_Query result:", result);
-            const output = fs.readFileSync('/home/ubuntu/ApolloXIIT/TextAndImageProcessing/JSON/output.json').toJSON();
+            const output = fs.readFileSync('/home/ubuntu/ApolloXIIT/TextAndImageProcessing/JSON/output.json').toString();
 
-            let data = output;
+            let data = JSON.parse(output);
 
             console.log("Query data:", data);
 
