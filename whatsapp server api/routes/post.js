@@ -297,7 +297,7 @@ router.post('/', async (req, res) => {
 
             let data = output;
 
-            if (typeof output === 'object') {
+            if (typeof output === 'string') {
                data = JSON.parse(output);
             }
 
