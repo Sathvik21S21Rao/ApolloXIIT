@@ -20,6 +20,27 @@ const dbQueries = require('../utils/dbQueries');
 
 // const database = require('./database');
 
+function OBJtoXML(obj) {
+   var xml = '';
+   for (var prop in obj) {
+     xml += obj[prop] instanceof Array ? '' : "<" + prop + ">";
+     if (obj[prop] instanceof Array) {
+       for (var array in obj[prop]) {
+         xml += "<" + prop + ">";
+         xml += OBJtoXML(new Object(obj[prop][array]));
+         xml += "</" + prop + ">";
+       }
+     } else if (typeof obj[prop] == "object") {
+       xml += OBJtoXML(new Object(obj[prop]));
+     } else {
+       xml += obj[prop];
+     }
+     xml += obj[prop] instanceof Array ? '' : "</" + prop + ">";
+   }
+   var xml = xml.replace(/<\/?[0-9]{1,}>/g, '');
+   return xml
+ }
+
 router.post('/', async (req, res) => {
    const { body } = req;
 
@@ -219,6 +240,8 @@ router.post('/', async (req, res) => {
       return respone;
    }
 
+   console.log(body.NumMedia)
+
    if (body.NumMedia > 0) {
       const url = body[`MediaUrl0`]
       const accessibleUrl = "https://" + username + ":" + password + "@" + url.slice(8);
@@ -254,7 +277,11 @@ router.post('/', async (req, res) => {
 
             let resp = await handleQueries(data);
 
-            console.log(resp);
+            if (typeof resp === 'object') {
+               resp = OBJtoXML(resp);
+            }
+
+            console.log("Query result:", resp);
             message = new MessagingResponse().message(resp);   
 
             // res.set('Content-Type', 'text/xml');
