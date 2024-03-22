@@ -113,7 +113,7 @@ router.post('/', async (req, res) => {
             let newDate = data.Date;
 
             if (!data.Date) {
-               data.Date = new Date();
+               newDate = new Date();
             } else if (data.Date.includes("/")) {
                let x = data.Date.split("/").reverse();
                newDate = new Date(...x);
@@ -142,7 +142,7 @@ router.post('/', async (req, res) => {
             let newDate = data.Date;
 
             if (!data.Date) {
-               data.Date = new Date();
+               newDate = new Date();
             } else if (data.Date.includes("/")) {
                let x = data.Date.split("/").reverse();
                newDate = new Date(...x);
