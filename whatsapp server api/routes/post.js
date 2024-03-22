@@ -317,8 +317,14 @@ router.post('/', async (req, res) => {
                let resp = await handleQueries(data);
 
                if (typeof resp === 'object' && resp.image) {
-                  message = new MessagingResponse().message(resp.message);
+                  message = new MessagingResponse().message("Here u go!");
                   message.media(resp.image);
+                  return res.status(200).send(message.toString());
+               }
+               
+               if (typeof resp === 'array' && resp[0].image) {
+                  message = new MessagingResponse().message("Here u go!");
+                  message.media(resp[0].image);
                   return res.status(200).send(message.toString());
                }
                
