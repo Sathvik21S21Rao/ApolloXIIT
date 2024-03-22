@@ -4,15 +4,15 @@ const mongoose = require('mongoose');
 const drugSchema = new mongoose.Schema({
     nameOfDrug: {
         type: String,
-        required: true
+        required: false
     },
     schedule: {
         type: String,
-        required: true
+        required: false
     },
     amount: {
         type: String,
-        required: true
+        required: false
     }
 });
 

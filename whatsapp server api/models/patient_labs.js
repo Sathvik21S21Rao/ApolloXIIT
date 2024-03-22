@@ -4,23 +4,23 @@ const mongoose = require('mongoose');
 const labSchema = new mongoose.Schema({
     doctorName: {
         type: String,
-        required: true
+        required: false
     },
     hospitalName: {
         type: String,
-        required: true
+        required: false
     },
     date: {
         type: Date,
-        required: true
+        required: false
     },
     type: {
         type: [String],
-        required: true
+        required: false
     },
     image: {
         type: String,
-        required: true
+        required: false
     }
 });
 

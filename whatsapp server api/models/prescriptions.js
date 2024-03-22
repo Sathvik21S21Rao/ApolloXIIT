@@ -4,27 +4,27 @@ const mongoose = require('mongoose');
 const prescriptionSchema = new mongoose.Schema({
     image: {
         type: String,
-        required: true
+        required: false
     },
     doctor: {
         type: String,
-        required: true
+        required: false
     },
     hospital: {
         type: String,
-        required: true
+        required: false
     },
     date: {
         type: Date,
-        required: true
+        required: false
     },
     drugs: {
         type: [String],
-        required: true
+        required: false
     },
     futureConsultation: {
         type: Boolean,
-        required: true
+        required: false
     }
 });
 
