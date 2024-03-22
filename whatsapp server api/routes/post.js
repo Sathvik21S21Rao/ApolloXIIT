@@ -151,13 +151,16 @@ router.post('/', async (req, res) => {
                let x = data.Date.split("-").reverse();
                newDate = new Date(...x);
             }
+
+            const futureConsultationBoolean = data['Future consultation'].toLowerCase() === "yes" ? true : false;
+
             const newPresDoc = new prescriptions({
                image: data.url,
                doctor: data['Doctor'],
                hospital: data['Hospital'],
                date: newDate,
                drugs: data['Drugs'],
-               futureConsultation: data['Future consultation']
+               futureConsultation: futureConsultationBoolean
             });
    
             await newPresDoc.save();
