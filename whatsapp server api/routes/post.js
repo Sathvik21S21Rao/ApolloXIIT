@@ -17,6 +17,7 @@ const labs = require('../models/patient_labs');
 const patients = require('../models/patients');
 const prescriptions = require('../models/prescriptions');
 const dbQueries = require('../utils/dbQueries');
+const drugs = require('../models/drugs'); 
 
 // const database = require('./database');
 
